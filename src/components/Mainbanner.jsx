@@ -1,14 +1,16 @@
 import React from 'react';
 import mainbanner from '../assets/main-banner.png';
+import mainbannersecond from '../assets/main-banner_2.png';
+
 import { Link } from 'react-router-dom';
 
 export const Mainbanner = () => {
   return (
     <div className="relative w-full">
       <img src={mainbanner} alt="Grocery Banner" className="w-full hidden md:block" />
-      <img src={mainbanner} alt="Grocery Banner" className="w-full md:hidden" />
+      <img src={mainbannersecond} alt="Grocery Banner" className="w-full md:hidden" /> 
 
-      <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-4 md:px-10 lg:px-24 text-center md:text-left">
+      <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-4 md:px-10 lg:px-24">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black max-w-md lg:max-w-2xl leading-tight lg:leading-snug drop-shadow-md">
           Freshness You Can Trust, Savings You Will Love
         </h1>
