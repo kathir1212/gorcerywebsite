@@ -11,7 +11,7 @@ export const AppContextProvider = ({children}) => {
     const navigate = useNavigate();
     const [user , setUser] = useState(null)
     const [isSeller , setIsSeller] = useState(false)
-    const [showUserogin , setShowUserLogin] = useState(false)
+    const [showUserLogin , setShowUserLogin] = useState(false)
     const [products, setProducts] = useState([])
         const [cartItems, setCartItems] = useState({}); 
 
@@ -21,8 +21,9 @@ export const AppContextProvider = ({children}) => {
           
     }
 
-    const addToCart = (id) => {
-    setCartItems(prev => ({ ...prev, [id]: 1 }));
+    const addToCart = (_id) => {
+    setCartItems(prev => ({ ...prev, [_id]: 1 }));
+
     console.log(cartItems,">>>card");
     
 };
@@ -41,7 +42,7 @@ const removeFromCart = (id) => {
          fetchProducts()
     },[])
    
-    const value = { navigate , user , setUser , setIsSeller , isSeller, fetchProducts , products , setProducts , addToCart , updateCartItem , removeFromCart , cartItems }
+    const value = { navigate , user , setUser , setIsSeller , isSeller, fetchProducts , products , setProducts , addToCart , updateCartItem , removeFromCart , cartItems , showUserLogin , setShowUserLogin }
 return <AppContext.Provider value ={value}>
     {children}
 </AppContext.Provider>

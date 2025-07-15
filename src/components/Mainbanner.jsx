@@ -17,7 +17,7 @@ export const Mainbanner = () => {
 
         <div className="mt-6">
           <Link
-            to="/shop"
+            to="/all-product"
             className="group inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dull transition rounded text-white cursor-pointer text-lg font-medium shadow-md"
           >
             Shop Now
