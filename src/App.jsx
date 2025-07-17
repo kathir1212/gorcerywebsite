@@ -15,6 +15,7 @@ import { Admin } from './pages/Admin'
 import { Upload } from './pages/upload'
 import { AdminallProduct } from './pages/adminallproduct'
 import { Dashboard } from './pages/dashboard'
+import { Productdetail } from './components/productdetail'
 
 function App() {
 
@@ -30,8 +31,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
          <Route path='/all-product' element={<Allproduct/>}/>
-          <Route path='/addtocard' element={<Addtocard/>}/>
+          <Route path='/addtocart' element={<Addtocard/>}/>
           <Route path='/myorder' element={<MyOrder/>}/>
+          <Route path='/all-product/:cateogry/:id' element={<Productdetail/>}/>
+
+
           
       </Routes>
     </div>

@@ -1,10 +1,13 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-    const { addToCart, updateCartItem, removeFromCart, cartItems } = useAppContext();
+    const { addToCart, updateCartItem, removeFromCart, cartItems , navigator } = useAppContext();
 
     const quantity = cartItems[product._id] || 0;
+
+    
 
     const handleAddToCart = (_id) => {
         addToCart(_id);
@@ -23,9 +26,11 @@ const ProductCard = ({ product }) => {
     };
 
     return (
-        <div className="border border-gray-500/20 mb-8 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
+        <div  className="border border-gray-500/20 mb-8 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
             <div className="group cursor-pointer flex items-center justify-center px-2">
-                <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" src={product.image[0]} alt={product.name} />
+                <Link to={`/all-product/${product.category}/${product._id}`}>
+             <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" src={product.image[0]} alt={product.name} />
+                </Link>
             </div>
             <div className="text-gray-500/60 text-sm">
                 <p>{product.category}</p>
@@ -50,7 +55,7 @@ const ProductCard = ({ product }) => {
                     </p>
                     <div className="text-indigo-500" onClick={(e) => e.stopPropagation()}>
                         {!quantity ? (
-                            <button className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium" onClick={() => handleAddToCart(product._id)}>
+                            <button  className="flex items-center justify-center gap-1 bg-indigo-100 border border-indigo-300 md:w-[80px] w-[64px] h-[34px] rounded text-indigo-600 font-medium" onClick={() => handleAddToCart(product._id)}>
                                 <svg w_idth="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M.583.583h2.333l1.564 7.81a1.17 1.17 0 0 0 1.166.94h5.67a1.17 1.17 0 0 0 1.167-.94l.933-4.893H3.5m2.333 8.75a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0m6.417 0a.583.583 0 1 1-1.167 0 .583.583 0 0 1 1.167 0" stroke="#615fff" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
