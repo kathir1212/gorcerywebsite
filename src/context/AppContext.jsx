@@ -49,7 +49,7 @@ return totalCount;
 const getCartAmount = () => {
     let totalAmount = 0;
     for ( const items in cartItems){
-        let itemInfo = products.find((product)=>product-_id === items);
+        let itemInfo = products.find((product)=>product._id === items);
         if(cartItems[items] > 0){
             totalAmount += itemInfo.offerPrice * cartItems[items]
         }
@@ -60,7 +60,11 @@ const getCartAmount = () => {
 
     useEffect (() => {                 
          fetchProducts()
-    },[])
+           console.log(cartItems, ">>> updated cart");
+
+    },[cartItems])
+
+   
    
     const value = { navigate , user , setUser , setIsSeller , isSeller, fetchProducts , products , setProducts , addToCart , updateCartItem , removeFromCart , cartItems , showUserLogin , setShowUserLogin , getCartCount,getCartAmount}
 return <AppContext.Provider value ={value}>

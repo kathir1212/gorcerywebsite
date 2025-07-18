@@ -12,9 +12,12 @@ export const Addtocard = () => {
    const [cartArray , setCartArray ] = useState([])
    const [addreses , setAddresses ] = useState(dummyAddress)
    const [ showAddress , setShowAddress] = useState(false)
-   const [sleectedAddress , setSelectedAddress] = useState(dummyAddress[0])
-  
+   const [slectedAddress , setSelectedAddress] = useState(dummyAddress[0])
+     const [paymentoption , setPaymentOption] = useState("COD")
+
    const getCart = () => {
+    console.log("lll");
+    
     let tempArray = []
     for(const key in cartItems){
         const product = products.find((items)=>items._id === key)
@@ -23,19 +26,22 @@ export const Addtocard = () => {
         
     }
     setCartArray(tempArray)
+
+    console.log(tempArray,"tempArraytempArray");
+    
    }
 
    useEffect(()=>{
-    if(products.lemgth > 0 && cartItems){
+    if(products.length > 0 && cartItems){
         getCart()
     }
-   },[products , cartItems     ])
+   },[products,cartItems])
   
    return products.length > 0 && cartItems ? (
     <div className="flex flex-col md:flex-row py-16 max-w-6xl w-full px-6 mx-auto">
             <div className='flex-1 max-w-4xl'>
                 <h1 className="text-3xl font-medium mb-6">
-                    Shopping Cart <span className="text-sm text-indigo-500">3</span>
+                    Shopping Cart <span className="text-sm text-indigo-500">{getCartCount()}</span>
                 </h1>
 
                 <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
@@ -47,7 +53,7 @@ export const Addtocard = () => {
                 {cartArray.map((product, index) => (
                     <div key={index} className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 items-center text-sm md:text-base font-medium pt-3">
                         <div className="flex items-center md:gap-6 gap-3">
-                            <div className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
+                            <div onClick={()=>{`/all-product/${product.category}/${product._id}`}} className="cursor-pointer w-24 h-24 flex items-center justify-center border border-gray-300 rounded overflow-hidden">
                                 <img className="max-w-full h-full object-cover" src={product.image[0]} alt={product.name} />
                             </div>
                             <div>
@@ -57,7 +63,7 @@ export const Addtocard = () => {
                                     <div className='flex items-center'>
                                         <p>Qty:</p>
                                         <select className='outline-none'>
-                                            {Array(5).fill('').map((_, index) => (
+                                            {Array(cartItems[product._id] < 9 ? cartItems[product._id] : 9).fill('').map((_, index) => (
                                                 <option key={index} value={index + 1}>{index + 1}</option>
                                             ))}
                                         </select> 
@@ -108,7 +114,7 @@ export const Addtocard = () => {
 
                     <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
 
-                    <select className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
+                    <select  onClick={e => setPaymentOption(e.target.value)} className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
                         <option value="COD">Cash On Delivery</option>
                         <option value="Online">Online Payment</option>
                     </select>
@@ -118,23 +124,23 @@ export const Addtocard = () => {
 
                 <div className="text-gray-500 mt-4 space-y-2">
                     <p className="flex justify-between">
-                        <span>Price</span><span>$20</span>
+                        <span>Price</span><span>Rs{getCartAmount()}</span>
                     </p>
                     <p className="flex justify-between">
                         <span>Shipping Fee</span><span className="text-green-600">Free</span>
                     </p>
                     <p className="flex justify-between">
-                        <span>Tax (2%)</span><span>$20</span>
+                        <span>Tax (2%)</span><span>Rs{getCartAmount() * 2 / 100}</span>
                     </p>
                     <p className="flex justify-between text-lg font-medium mt-3">
-                        <span>Total Amount:</span><span>$20</span>
+                        <span>Total Amount:</span><span>Rs{getCartAmount() + getCartAmount() * 2 / 100}</span>
                     </p>
                 </div>
 
                 <button onClick={()=>navigate('/myorder')} className="w-full py-3 mt-6 cursor-pointer bg-indigo-500 text-white font-medium hover:bg-indigo-600 transition">
-                    Place Order
+                  {paymentoption === "COD" ? "placeorder" : "proceed the checkout" }
                 </button>
             </div>
         </div>
-  ) : "kathir"
+  ) : null
 };
