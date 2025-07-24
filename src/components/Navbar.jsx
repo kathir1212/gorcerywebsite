@@ -1,15 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/AppContext';
-
+import axios from 'axios';
+import logo from '../assets/grocery-logo.jpg'
 export const Navbar = () => {
     const [open, setOpen] = React.useState(false)
     console.log(open,"open>>>>>>");
-    const {user , setUser , isSeller ,showUserLogin , setShowUserLogin,getCartCount,getCartAmount} = useAppContext();
+    const {user , setUser , navigate,  isSeller ,showUserLogin , setShowUserLogin,getCartCount,getCartAmount} = useAppContext();
     console.log(user,">>>>>>userkk");
 
- const logout = () => {
+ const logout = async () => {
+    try{
+const { data } = await axios.get('/api/user/logout')
+if(data.success){
+alert(data.message);
   setUser(null)
+ navigate('/')
+} else{
+    alert(data.message)
+}
+    }
+    catch(error){
+alert(error.message)
+    }
 }
 
 const login = () => {
@@ -21,7 +34,7 @@ setShowUserLogin(true)
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
 <a href="#">
-    <img className="h-9" src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/dummyLogo/dummyLogoColored.svg" alt="dummyLogoColored" />
+    <img className="w-[100px] h-[63px]" src={logo} alt="dummyLogoColored" />
 </a>
 
 {/* Desktop Menu */}
@@ -31,7 +44,7 @@ setShowUserLogin(true)
     {user &&
     <Link to="/myorder">My Order</Link>
     }
-        <Link to="/admin">Admin</Link>
+        <Link to="/seller">Admin</Link>
 
 
     
@@ -59,7 +72,7 @@ setShowUserLogin(true)
     </button>
  )
  : (
-    <button onClick={logout} className="cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
+    <button onClick={()=>logout()} className="cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
         Logout
     </button>
  )}

@@ -1,8 +1,8 @@
 import React, { use } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/AppContext"; 
 export const AdminallProduct = () => {
 
-    const {products} = useAppContext()
+  const { products } = useAppContext(); 
 
     
     return (

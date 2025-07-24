@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { Upload } from "./upload";
 
 export const Admin = () => {
     const location = useLocation();
@@ -49,6 +50,7 @@ export const Admin = () => {
 
             {/* Right Content */}
             <div className="flex-1 bg-white p-4 overflow-y-auto">
+                
                 <Outlet />
             </div>
         </div>

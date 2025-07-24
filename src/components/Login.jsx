@@ -1,23 +1,37 @@
 
 import React from "react";
 import { useAppContext } from "../context/AppContext";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
 const Login = () => {
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
-    const {showUserLogin , setShowUserLogin , user , setUser} = useAppContext()
-   const onsubmitHandler = async (event) =>{
-    event.preventDefault();
-    setUser({
-        email : "kathirvel@gmail.com",
-        password : "kathirvel"
-    }) 
-    setShowUserLogin(false)
-    console.log(user,"userrrrr");
-    
-   }
+    const {showUserLogin , setShowUserLogin , user , setUser, navigate} = useAppContext()
+   const onsubmitHandler = async (event) => {
+  event.preventDefault();
+
+  try {
+    const { data } = await axios.post(
+      `/api/user/${state}`,
+      { name, email, password },
+      { withCredentials: true } // ⚠️ Important for sending/receiving cookies
+    );
+
+    if (data.success) {
+      setUser(data.user);
+      setShowUserLogin(false);
+      navigate('/');
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    alert(error.response?.data?.message || error.message);
+  }
+};
+
 
    const closeModal = () =>{
       setShowUserLogin(false)

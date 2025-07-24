@@ -15,7 +15,7 @@ export const Productdetail = () => {
         if (product) {
             const sameCategory = products.filter(p => p.category === product.category && p._id !== product._id);
             setRelatedProducts(sameCategory.slice(0, 5));
-            setThumbnail(product.image?.[0] || null);
+            setThumbnail(product.images[0] || null);
         }
     }, [products, product]);
 
@@ -36,7 +36,7 @@ export const Productdetail = () => {
                 {/* Image section */}
                 <div className="flex gap-3">
                     <div className="flex flex-col gap-3">
-                        {product.image.map((image, index) => (
+                        {product.images.map((image, index) => (
                             <div
                                 key={index}
                                 onClick={() => setThumbnail(image)}
@@ -85,9 +85,7 @@ export const Productdetail = () => {
                     {/* Description */}
                     <p className="text-base font-medium mt-6">About Product</p>
                     <ul className="list-disc ml-4 text-gray-500/70">
-                        {product.description.map((desc, index) => (
-                            <li key={index}>{desc}</li>
-                        ))}
+                        {product.description}
                     </ul>
 
                     {/* Buttons */}
@@ -115,7 +113,7 @@ export const Productdetail = () => {
                     <div className="flex gap-4 overflow-x-auto">
                         {relatedProducts.map(item => (
                             <Link to={`/product/${item._id}`} key={item._id} className="w-48 border p-2 rounded">
-                                <img src={item.image[0]} alt={item.name} />
+                                <img src={item.images[0]} alt={item.name} />
                                 <p className="text-sm mt-2">{item.name}</p>
                             </Link>
                         ))}
