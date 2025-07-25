@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ProductCard = ({ product }) => {
     const { addToCart, updateCartItem, removeFromCart, cartItems , navigator } = useAppContext();
@@ -30,6 +31,11 @@ const ProductCard = ({ product }) => {
             updateCartItem(_id, quantity - 1);
         }
     };
+
+    useEffect (() => {   
+          
+    
+        },[cartItems])
 
     return (
         <div  className="border border-gray-500/20 mb-8 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">

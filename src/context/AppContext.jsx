@@ -12,11 +12,14 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
     const navigate = useNavigate();
-    const [user , setUser] = useState("68807ea385539fa2f3230892")
+    const [user , setUser] = useState()
     const [isSeller , setIsSeller] = useState(true)
     const [showUserLogin , setShowUserLogin] = useState(false)
     const [products, setProducts] = useState([])
         const [cartItems, setCartItems] = useState({}); 
+
+        console.log(cartItems,"cartItemscartItems");
+        
 
 
  const fetchSeller = async () => {
@@ -91,7 +94,14 @@ const removeFromCart = (id) => {
 const getCartCount = () => { 
 let totalCount = 0;
 for (const item in cartItems){
+    console.log(cartItems[item],"cartItems[item]");
+    
     totalCount += cartItems[item];
+
+    console.log(totalCount,"totalCount");
+    
+    console.log(totalCount,"totalCounttotalCount");
+    
 }
 return totalCount;
 }
@@ -109,40 +119,50 @@ const getCartAmount = () => {
 }
 
 
+
     useEffect (() => {   
         fetchUser()
         fetchSeller()              
          fetchProducts()
            console.log(cartItems, ">>> updated cart");
 
-    },[cartItems])
+    },[])
 
-    useEffect(()=>{
-        const updateCart = async () => {
-            try{
-                const {data} = await axios.patch('api/cart/update', {
-                    user:"68807ea385539fa2f3230892",
-                    cartItems})
-                if(!data.success){
-                    alert(data.message)
-                }
-            }
-            catch(error){
-                alert(error.message)
-            }
-        }
-        console.log("user", user);
-        
-        if(user){
+    // useEffect(()=>{
+    //      const updateCart =  async () => {
+    //         try{
+    //             const {data} = await axios.patch('api/cart/update', {
+    //                 user:"68807ea385539fa2f3230892",
+    //                 cartItems})
+    //             if(!data.success){
+    //                 alert(data.message)
+    //             }
+    //         }
+    //         catch(error){
+    //             alert(error.message)
+    //         }
+    //     }
+    //     console.log("user", user);
 
-            updateCart()
-        }
-    },[cartItems])
+               
+    //     if(user){
+
+    //         updateCart()
+    //     }
+    // },[cartItems,user])
 
    
    
-    const value = { navigate , user , setUser , setIsSeller , isSeller, fetchProducts , products , setProducts , addToCart , updateCartItem , removeFromCart , cartItems , showUserLogin , setShowUserLogin ,
-         getCartCount,getCartAmount}
+    const value = { navigate ,
+         user , 
+         setUser 
+         , 
+         setIsSeller 
+         , isSeller,
+          fetchProducts ,
+           products ,
+            setProducts , addToCart , updateCartItem , removeFromCart , cartItems , showUserLogin , setShowUserLogin ,
+         getCartCount,getCartAmount, setCartItems}
 return <AppContext.Provider value ={value}>
     {children}
 </AppContext.Provider>

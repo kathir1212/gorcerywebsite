@@ -14,6 +14,7 @@ import { Productdetail } from './components/productdetail'
 import { Seller } from './components/seller'
 import { AdminallProduct } from './pages/adminallproduct'
 import { useAppContext } from './context/AppContext'
+import AddressForm from './components/addAdress'
 import axios from 'axios'
 import './App.css'
 
@@ -36,6 +37,10 @@ function App() {
           <Route path='/addtocart' element={<Addtocard />} />
           <Route path='/myorder' element={<MyOrder />} />
           <Route path='/all-product/:category/:id' element={<Productdetail />} />
+          <Route path='/address' element={<AddressForm />} />
+
+
+          
 
           {/* Seller */}
           <Route path='/seller' element={<Seller />} />
