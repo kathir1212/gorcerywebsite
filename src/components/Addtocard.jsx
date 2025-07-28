@@ -37,27 +37,33 @@ export const Addtocard = () => {
   };
 
   const getUserAddress = async () => {
-    try {
-      const { data } = await axios.get('https://newgroceryserver.onrender.com/api/address/get');
-      if (data.success) {
-        console.log(data.address,"datttttaddresss");
-        
-        setAddresses(data.address);
-        console.log(data.address.length,"data.addresses.length");
-        
-        if (data.address.length > 0) {
-
-          setSelectedAddress(data.address[0]);
-          console.log("hi jack");
-          
-        } else {
-          alert('No address found');
-        }
+  try {
+    const { data } = await axios.get(
+      '/api/address/get',
+      {
+        withCredentials: true // <-- include this to send cookies
       }
-    } catch (error) {
-      alert(error.message,"1");
+    );
+
+    if (data.success) {
+      console.log(data.address, "datttttaddresss");
+
+      setAddresses(data.address);
+      console.log(data.address.length, "data.addresses.length");
+
+      if (data.address.length > 0) {
+        setSelectedAddress(data.address[0]);
+        console.log("hi jack");
+      } else {
+        alert('No address found');
+      }
     }
-  };
+  } catch (error) {
+    alert(error.message);
+    console.log(error);
+  }
+};
+
 
  const placeOrder = async () => {
   try {

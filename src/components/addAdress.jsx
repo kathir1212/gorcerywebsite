@@ -31,6 +31,9 @@ const AddressForm = ({ userId }) => {
     try {
       const { data } = await axios.post("https://newgroceryserver.onrender.com/api/address/add", {
         address
+      },
+    {
+        withCredentials: true, // <--- This is the key part
       });
     if(data.success){
       alert(data.message)

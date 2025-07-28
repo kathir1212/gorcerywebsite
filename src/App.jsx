@@ -18,7 +18,7 @@ import axios from 'axios'
 import './App.css'
 
 // Axios default setup
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 function App() {
   const { showUserLogin, setIsSeller, isSeller } = useAppContext()
@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       {showUserLogin && <Login />}
-      {!isSeller && <Navbar />}
+      <Navbar />
 
       <div className='px-6 md:px-16 lg:px-24 xl:px-32'>
         <Routes>

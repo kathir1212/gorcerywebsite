@@ -24,38 +24,38 @@ export const AppContextProvider = ({children}) => {
         
 
 
- const fetchSeller = async () => {
-        try {
-            const {data} = await axios.get('https://newgroceryserver.onrender.com/api/seller/is-auth');
-            if(data.success){
-                setIsSeller(true)
-            }else{
-                setIsSeller(false)
-            }
-        } catch(error){
-              alert(error)
-        }
-    }
+//  const fetchSeller = async () => {
+//         try {
+//             const {data} = await axios.get('https://newgroceryserver.onrender.com/api/seller/is-auth');
+//             if(data.success){
+//                 setIsSeller(true)
+//             }else{
+//                 setIsSeller(false)
+//             }
+//         } catch(error){
+//               alert(error)
+//         }
+//     }
 
-    const fetchUser = async () => {
-        try{
-    const {data} = await axios.get('https://newgroceryserver.onrender.com/api/user/is-auth');
-    if(data.success){
- setUser(data.user)
-setCartItems(data.user.cartItems)
+//     const fetchUser = async () => {
+//         try{
+//     const {data} = await axios.get('https://newgroceryserver.onrender.com/api/user/is-auth');
+//     if(data.success){
+//  setUser(data.user)
+// setCartItems(data.user.cartItems)
 
 
-        console.log("user", user);
+//         console.log("user", user);
 
                
        
-    }
+//     }
     
-} 
-        catch(error){
-          setUser(null)
-        }
-    }
+// } 
+//         catch(error){
+//           setUser(null)
+//         }
+//     }
     
 
     // const fetchProducts = async () => {
@@ -138,8 +138,8 @@ const getCartAmount = () => {
 
 
     useEffect (() => {   
-        fetchUser()
-        fetchSeller()              
+        // fetchUser()
+        // fetchSeller()              
          fetchProducts()
            console.log(cartItems, ">>> updated cart");
 
