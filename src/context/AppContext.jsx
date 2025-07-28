@@ -26,7 +26,7 @@ export const AppContextProvider = ({children}) => {
 
  const fetchSeller = async () => {
         try {
-            const {data} = await axios.get('/api/seller/is-auth');
+            const {data} = await axios.get('https://newgroceryserver.onrender.com/api/seller/is-auth');
             if(data.success){
                 setIsSeller(true)
             }else{
@@ -65,7 +65,7 @@ setCartItems(data.user.cartItems)
 
     const fetchProducts = async () =>{
         try{
-   const { data } = await axios.get('/api/product/list')
+   const { data } = await axios.get('https://newgroceryserver.onrender.com/api/product/list')
    console.log(data,"prooooo");
    
    if(data.success){

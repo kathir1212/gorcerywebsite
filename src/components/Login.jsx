@@ -15,7 +15,7 @@ const Login = () => {
 
   try {
     const { data } = await axios.post(
-      `/api/user/${state}`,
+      `https://newgroceryserver.onrender.com/api/user/${state}`,
       { name, email, password },
       { withCredentials: true } // ⚠️ Important for sending/receiving cookies
     );

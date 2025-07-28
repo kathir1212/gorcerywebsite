@@ -11,7 +11,7 @@ export const MyOrder = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const { data } = await axios.get('/api/order/user', { userId: user._id });
+        const { data } = await axios.get('https://newgroceryserver.onrender.com/api/order/user', { userId: user._id });
         if (data.success) {
           setOrders(data.order);
         } else {

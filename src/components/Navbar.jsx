@@ -11,7 +11,7 @@ export const Navbar = () => {
 
  const logout = async () => {
     try{
-const { data } = await axios.get('/api/user/logout')
+const { data } = await axios.get('https://newgroceryserver.onrender.com/api/user/logout')
 if(data.success){
 alert(data.message);
   setUser(null)

@@ -38,7 +38,7 @@ export const Addtocard = () => {
 
   const getUserAddress = async () => {
     try {
-      const { data } = await axios.get('/api/address/get');
+      const { data } = await axios.get('https://newgroceryserver.onrender.com/api/address/get');
       if (data.success) {
         console.log(data.address,"datttttaddresss");
         
@@ -66,7 +66,7 @@ export const Addtocard = () => {
     }
 
     if (paymentOption === 'COD') {
-      const response = await axios.post('/api/order/cod', {
+      const response = await axios.post('https://newgroceryserver.onrender.com/api/order/cod', {
         userId: user._id,
         items: cartArray.map(item => ({
           product: item._id,
@@ -87,7 +87,7 @@ export const Addtocard = () => {
     }
     else{
 
-         const response = await axios.post('/api/order/stripe', {
+         const response = await axios.post('https://newgroceryserver.onrender.com/api/order/stripe', {
         userId: user._id,
         items: cartArray.map(item => ({
           product: item._id,

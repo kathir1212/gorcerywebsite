@@ -29,7 +29,7 @@ const AddressForm = ({ userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/address/add", {
+      const { data } = await axios.post("https://newgroceryserver.onrender.com/api/address/add", {
         address
       });
     if(data.success){
