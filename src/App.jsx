@@ -9,7 +9,6 @@ import { Addtocard } from './components/Addtocard'
 import { MyOrder } from './pages/Myorder'
 import { Admin } from './pages/Admin'
 import { Upload } from './pages/upload'
-import { Dashboard } from './pages/dashboard'
 import { Productdetail } from './components/productdetail'
 import { Seller } from './components/seller'
 import { AdminallProduct } from './pages/adminallproduct'
@@ -50,7 +49,7 @@ function App() {
             <Route index element={<Upload />} />
             <Route path='upload' element={<Upload />} />
             <Route path='ad-allproduct' element={<AdminallProduct />} />
-            <Route path='dashboard' element={<Dashboard />} />
+            {/* <Route path='dashboard' element={<Dashboard/>} /> */}
           </Route>
         </Routes>
       </div>

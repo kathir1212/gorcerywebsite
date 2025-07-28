@@ -12,7 +12,9 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({children}) => {
     const navigate = useNavigate();
-    const [user , setUser] = useState()
+        const [userId , setUserId] = useState(null)
+
+    const [user , setUser] = useState(null)
     const [isSeller , setIsSeller] = useState(true)
     const [showUserLogin , setShowUserLogin] = useState(false)
     const [products, setProducts] = useState([])
@@ -39,8 +41,14 @@ export const AppContextProvider = ({children}) => {
         try{
     const {data} = await axios.get('api/user/is-auth');
     if(data.success){
-setUser(data.user)
+ setUser(data.user)
 setCartItems(data.user.cartItems)
+
+
+        console.log("user", user);
+
+               
+       
     }
     
 } 
@@ -93,6 +101,7 @@ const removeFromCart = (id) => {
 
 const getCartCount = () => { 
 let totalCount = 0;
+
 for (const item in cartItems){
     console.log(cartItems[item],"cartItems[item]");
     
@@ -108,8 +117,16 @@ return totalCount;
 
 const getCartAmount = () => {
     let totalAmount = 0;
+    console.log(totalAmount,"totalamount");
+    
     for ( const items in cartItems){
+
+        console.log(items,"items>>>>>");
+        
+
         let itemInfo = products.find((product)=>product._id === items);
+        console.log(itemInfo,"itemInfo");
+        
         if(cartItems[items] > 0){
             totalAmount += itemInfo.offerPrice * cartItems[items]
         }
@@ -128,28 +145,29 @@ const getCartAmount = () => {
 
     },[])
 
-    // useEffect(()=>{
-    //      const updateCart =  async () => {
-    //         try{
-    //             const {data} = await axios.patch('api/cart/update', {
-    //                 user:"68807ea385539fa2f3230892",
-    //                 cartItems})
-    //             if(!data.success){
-    //                 alert(data.message)
-    //             }
-    //         }
-    //         catch(error){
-    //             alert(error.message)
-    //         }
-    //     }
-    //     console.log("user", user);
+    useEffect(()=>{
+        const updateCart =  async () => {
+            try{
+                const {data} = await axios.patch('api/cart/update', {
+                    userId : "68837f4ea534c98e99994b97",
+                    cartItems})
 
-               
-    //     if(user){
+                    console.log(data,"datadatacartitem");
+                    
+                if(!data.success){
+                    alert(data.message)
+                }
+            }
+            catch(error){
+                alert(error.message)
+            }
+        }
+        //  if(user){
 
-    //         updateCart()
-    //     }
-    // },[cartItems,user])
+        //     updateCart()
+        // }
+         
+    },[cartItems,user])
 
    
    
