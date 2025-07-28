@@ -39,7 +39,7 @@ export const Addtocard = () => {
   const getUserAddress = async () => {
   try {
     const { data } = await axios.get(
-      '/api/address/get',
+      'https://newgroceryserver.onrender.com/api/address/get',
       {
         withCredentials: true // <-- include this to send cookies
       }
