@@ -61,7 +61,7 @@ export const MyOrder = () => {
               <p>{order.address?.country}</p>
             </div>
 
-            <p className="font-medium text-base my-auto text-black/70">${order.amount}</p>
+            <p className="font-medium text-base my-auto text-black/70">Rs{order.amount}</p>
 
             <div className="flex flex-col text-sm">
               <p>Method: {order.paymentType}</p>
